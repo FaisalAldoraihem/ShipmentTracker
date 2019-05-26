@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Shipment Tracker</string>
+    <string name="new_shipment">New Shipment</string>
+    <string name="tracking_number">Tracking Number</string>
+    <string name="title_hint">Title(optional)</string>
+    <string name="carrier">Carrier</string>
+    <string name="done">Done</string>
+    <string name="cancel">CANCEL</string>
 </resources>
