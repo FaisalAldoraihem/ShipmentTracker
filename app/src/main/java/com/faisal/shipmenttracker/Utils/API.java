@@ -1,7 +1,10 @@
 package com.faisal.shipmenttracker.Utils;
 
 import com.faisal.shipmenttracker.POJO.Shipment;
-import com.faisal.shipmenttracker.POJO.ShipmentInfo;
+import com.faisal.shipmenttracker.POJO.Tracking;
+
+
+import org.json.JSONObject;
 
 
 import retrofit2.Call;
@@ -11,40 +14,42 @@ import retrofit2.http.GET;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface API {
 
-    String api = "be42fb27-d087-41a6-8ac2-9645698b98ff";
+    String api = "393affd4-063f-4f8c-af22-12decd7b93b7";
+
 
     @Headers({
-            "Content - Type:application/json",
-            "Trackingmore-Api-Key:api" + api
+            "Content-Type:application/json",
+            "aftership-api-key:" + api
     })
-    @POST("/post")
-    Call<ShipmentInfo> postTracking(@Body ShipmentInfo info);
+    @POST("trackings")
+    Call<JSONObject> postTracking(@Body com.faisal.shipmenttracker.Shipment.Tracking info);
 
     @Headers({
-            "Content - Type:application/json",
-            "Trackingmore-Api-Key:" + api
+            "Content-Type:application/json",
+            "aftership-api-key:" + api
     })
-    @GET("/{carrier_code}/{tracking_number}")
-    Call<Shipment> getShipment(@Path("carrier_code") String carrier,
+    @GET("trackings/{slug}/{tracking_number}")
+    Call<Shipment> getShipment(@Path("slug") String carrier,
                                @Path("tracking_number") String tracking);
 
     @Headers({
-            "Content - Type:application/json",
-            "Trackingmore-Api-Key:" + api
+            "Content-Type:application/json",
+            "aftership-api-key:" + api
     })
-    @GET("get?page=1&limit=25&created_at_min=1441314361&created_at_max=1446949161")
-    Call<Shipment> getShipments();
+    @GET("trackings")
+    Call<Shipment> getShipments(@Query("keyword") String id);
 
     @Headers({
-            "Content - Type:application/json",
-            "Trackingmore-Api-Key:" + api
+            "Content-Type:application/json",
+            "aftership-api-key:" + api
     })
-    @DELETE("/{carrier_code}/{tracking_number}")
-    Call<ShipmentInfo> deleteTracking(@Path("carrier_code") String carrier,
-                                      @Path("tracking_number") String tracking);
+    @DELETE("trackings/{slug}/{tracking_number}")
+    Call<JSONObject> deleteTracking(@Path("slug") String carrier,
+                                  @Path("tracking_number") String tracking);
 
 }
 

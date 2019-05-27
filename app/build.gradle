@@ -42,4 +42,8 @@ dependencies {
     implementation "com.jakewharton:butterknife:$rootProject.Butterknife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.Butterknife"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.Okhttp"
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+
+
 }

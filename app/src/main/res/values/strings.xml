@@ -6,4 +6,7 @@
     <string name="carrier">Carrier</string>
     <string name="done">Done</string>
     <string name="cancel">CANCEL</string>
+    <string name="dots">&#8942;</string>
+    <string name="Archive">Archive</string>
+    <string name="Delete">Delete</string>
 </resources>

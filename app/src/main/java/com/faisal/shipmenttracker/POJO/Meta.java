@@ -8,12 +8,12 @@ public class Meta {
     @SerializedName("code")
     @Expose
     private Integer code;
-    @SerializedName("type")
-    @Expose
-    private String type;
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("type")
+    @Expose
+    private String type;
 
     public Integer getCode() {
         return code;
@@ -23,20 +23,20 @@ public class Meta {
         this.code = code;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public String getMessage() {
         return message;
     }
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
 }
