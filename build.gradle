@@ -35,4 +35,5 @@ ext{
     Timber = '4.7.1'
     Okhttp = '3.14.2'
     Butterknife = '10.1.0'
+    parcler = '1.1.12'
 }

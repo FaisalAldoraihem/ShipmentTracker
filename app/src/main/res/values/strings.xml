@@ -9,4 +9,5 @@
     <string name="dots">&#8942;</string>
     <string name="Archive">Archive</string>
     <string name="Delete">Delete</string>
+    <string name="no_network">Could Not Connect To the Network</string>
 </resources>

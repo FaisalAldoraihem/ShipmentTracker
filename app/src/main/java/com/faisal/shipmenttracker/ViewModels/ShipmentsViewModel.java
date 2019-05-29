@@ -6,11 +6,9 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.faisal.shipmenttracker.POJO.Shipment;
-import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.UI.MainActivity;
 import com.faisal.shipmenttracker.Utils.API;
 import com.faisal.shipmenttracker.Utils.NetworkClient;
-import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
 
 import retrofit2.Call;
 import retrofit2.Callback;

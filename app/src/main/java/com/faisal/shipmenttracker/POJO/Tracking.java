@@ -3,166 +3,121 @@ package com.faisal.shipmenttracker.POJO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 public class Tracking {
+
+    public Tracking() {
+    }
 
     @SerializedName("id")
     @Expose
-    private String id;
-    @SerializedName("created_at")
-    @Expose
-    private String createdAt;
-    @SerializedName("updated_at")
-    @Expose
-    private String updatedAt;
+    public String id;
     @SerializedName("last_updated_at")
     @Expose
-    private String lastUpdatedAt;
+    public String lastUpdatedAt;
     @SerializedName("tracking_number")
     @Expose
-    private String trackingNumber;
+    public String trackingNumber;
     @SerializedName("slug")
     @Expose
-    private String slug;
-    @SerializedName("active")
-    @Expose
-    private Boolean active;
-    @SerializedName("android")
-    @Expose
-    private List<Object> android = null;
-    @SerializedName("custom_fields")
-    @Expose
-    private Object customFields;
+    public String slug;
     @SerializedName("customer_name")
     @Expose
-    private Object customerName;
+    public String customerName;
     @SerializedName("delivery_time")
     @Expose
-    private Integer deliveryTime;
+    public Integer deliveryTime;
     @SerializedName("destination_country_iso3")
     @Expose
-    private String destinationCountryIso3;
+    public String destinationCountryIso3;
     @SerializedName("courier_destination_country_iso3")
     @Expose
-    private String courierDestinationCountryIso3;
-    @SerializedName("emails")
-    @Expose
-    private List<Object> emails = null;
+    public String courierDestinationCountryIso3;
     @SerializedName("expected_delivery")
     @Expose
-    private Object expectedDelivery;
-    @SerializedName("ios")
-    @Expose
-    private List<Object> ios = null;
-    @SerializedName("note")
-    @Expose
-    private Object note;
+    public String expectedDelivery;
     @SerializedName("order_id")
     @Expose
-    private Object orderId;
+    public String orderId;
     @SerializedName("order_id_path")
     @Expose
-    private Object orderIdPath;
+    public String orderIdPath;
     @SerializedName("origin_country_iso3")
     @Expose
-    private String originCountryIso3;
+    public String originCountryIso3;
     @SerializedName("shipment_package_count")
     @Expose
-    private Integer shipmentPackageCount;
+    public Integer shipmentPackageCount;
     @SerializedName("shipment_pickup_date")
     @Expose
-    private String shipmentPickupDate;
+    public String shipmentPickupDate;
     @SerializedName("shipment_delivery_date")
     @Expose
-    private String shipmentDeliveryDate;
+    public String shipmentDeliveryDate;
     @SerializedName("shipment_type")
     @Expose
-    private String shipmentType;
+    public String shipmentType;
     @SerializedName("shipment_weight")
     @Expose
-    private Integer shipmentWeight;
+    public Integer shipmentWeight;
     @SerializedName("shipment_weight_unit")
     @Expose
-    private String shipmentWeightUnit;
-    @SerializedName("signed_by")
-    @Expose
-    private String signedBy;
-    @SerializedName("smses")
-    @Expose
-    private List<Object> smses = null;
+    public String shipmentWeightUnit;
     @SerializedName("source")
     @Expose
-    private String source;
+    public String source;
     @SerializedName("tag")
     @Expose
-    private String tag;
+    public String tag;
     @SerializedName("subtag")
     @Expose
-    private String subtag;
+    public String subtag;
     @SerializedName("subtag_message")
     @Expose
-    private String subtagMessage;
+    public String subtagMessage;
     @SerializedName("title")
     @Expose
-    private String title;
+    public String title;
     @SerializedName("tracked_count")
     @Expose
-    private Integer trackedCount;
-    @SerializedName("last_mile_tracking_supported")
-    @Expose
-    private Object lastMileTrackingSupported;
-    @SerializedName("language")
-    @Expose
-    private Object language;
+    public Integer trackedCount;
     @SerializedName("unique_token")
     @Expose
-    private String uniqueToken;
+    public String uniqueToken;
     @SerializedName("checkpoints")
     @Expose
-    private List<Checkpoint> checkpoints = null;
-    @SerializedName("subscribed_smses")
-    @Expose
-    private List<Object> subscribedSmses = null;
-    @SerializedName("subscribed_emails")
-    @Expose
-    private List<Object> subscribedEmails = null;
+    public List<Checkpoint> checkpoints = null;
     @SerializedName("return_to_sender")
     @Expose
-    private Boolean returnToSender;
-    @SerializedName("tracking_account_number")
-    @Expose
-    private Object trackingAccountNumber;
+    public Boolean returnToSender;
     @SerializedName("tracking_origin_country")
     @Expose
-    private Object trackingOriginCountry;
+    public String trackingOriginCountry;
     @SerializedName("tracking_destination_country")
     @Expose
-    private Object trackingDestinationCountry;
+    public String trackingDestinationCountry;
     @SerializedName("tracking_key")
     @Expose
-    private Object trackingKey;
+    public String trackingKey;
     @SerializedName("tracking_postal_code")
     @Expose
-    private Object trackingPostalCode;
+    public String trackingPostalCode;
     @SerializedName("tracking_ship_date")
     @Expose
-    private Object trackingShipDate;
+    public String trackingShipDate;
     @SerializedName("tracking_state")
     @Expose
-    private Object trackingState;
+    public String trackingState;
     @SerializedName("order_promised_delivery_date")
     @Expose
-    private String orderPromisedDeliveryDate;
-    @SerializedName("delivery_type")
-    @Expose
-    private String deliveryType;
+    public String orderPromisedDeliveryDate;
     @SerializedName("pickup_location")
     @Expose
-    private String pickupLocation;
-    @SerializedName("pickup_note")
-    @Expose
-    private Object pickupNote;
+    public String pickupLocation;
 
     public String getId() {
         return id;
@@ -170,22 +125,6 @@ public class Tracking {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
 
     public String getLastUpdatedAt() {
@@ -212,35 +151,13 @@ public class Tracking {
         this.slug = slug;
     }
 
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public List<Object> getAndroid() {
-        return android;
-    }
-
-    public void setAndroid(List<Object> android) {
-        this.android = android;
-    }
-
-    public Object getCustomFields() {
-        return customFields;
-    }
-
-    public void setCustomFields(Object customFields) {
-        this.customFields = customFields;
-    }
-
-    public Object getCustomerName() {
+    public String
+    getCustomerName() {
         return customerName;
     }
 
-    public void setCustomerName(Object customerName) {
+    public void setCustomerName(String
+                                        customerName) {
         this.customerName = customerName;
     }
 
@@ -268,51 +185,33 @@ public class Tracking {
         this.courierDestinationCountryIso3 = courierDestinationCountryIso3;
     }
 
-    public List<Object> getEmails() {
-        return emails;
-    }
-
-    public void setEmails(List<Object> emails) {
-        this.emails = emails;
-    }
-
-    public Object getExpectedDelivery() {
+    public String
+    getExpectedDelivery() {
         return expectedDelivery;
     }
 
-    public void setExpectedDelivery(Object expectedDelivery) {
+    public void setExpectedDelivery(String
+                                            expectedDelivery) {
         this.expectedDelivery = expectedDelivery;
     }
 
-    public List<Object> getIos() {
-        return ios;
-    }
-
-    public void setIos(List<Object> ios) {
-        this.ios = ios;
-    }
-
-    public Object getNote() {
-        return note;
-    }
-
-    public void setNote(Object note) {
-        this.note = note;
-    }
-
-    public Object getOrderId() {
+    public String
+    getOrderId() {
         return orderId;
     }
 
-    public void setOrderId(Object orderId) {
+    public void setOrderId(String
+                                   orderId) {
         this.orderId = orderId;
     }
 
-    public Object getOrderIdPath() {
+    public String
+    getOrderIdPath() {
         return orderIdPath;
     }
 
-    public void setOrderIdPath(Object orderIdPath) {
+    public void setOrderIdPath(String
+                                       orderIdPath) {
         this.orderIdPath = orderIdPath;
     }
 
@@ -372,22 +271,6 @@ public class Tracking {
         this.shipmentWeightUnit = shipmentWeightUnit;
     }
 
-    public String getSignedBy() {
-        return signedBy;
-    }
-
-    public void setSignedBy(String signedBy) {
-        this.signedBy = signedBy;
-    }
-
-    public List<Object> getSmses() {
-        return smses;
-    }
-
-    public void setSmses(List<Object> smses) {
-        this.smses = smses;
-    }
-
     public String getSource() {
         return source;
     }
@@ -436,22 +319,6 @@ public class Tracking {
         this.trackedCount = trackedCount;
     }
 
-    public Object getLastMileTrackingSupported() {
-        return lastMileTrackingSupported;
-    }
-
-    public void setLastMileTrackingSupported(Object lastMileTrackingSupported) {
-        this.lastMileTrackingSupported = lastMileTrackingSupported;
-    }
-
-    public Object getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(Object language) {
-        this.language = language;
-    }
-
     public String getUniqueToken() {
         return uniqueToken;
     }
@@ -468,22 +335,6 @@ public class Tracking {
         this.checkpoints = checkpoints;
     }
 
-    public List<Object> getSubscribedSmses() {
-        return subscribedSmses;
-    }
-
-    public void setSubscribedSmses(List<Object> subscribedSmses) {
-        this.subscribedSmses = subscribedSmses;
-    }
-
-    public List<Object> getSubscribedEmails() {
-        return subscribedEmails;
-    }
-
-    public void setSubscribedEmails(List<Object> subscribedEmails) {
-        this.subscribedEmails = subscribedEmails;
-    }
-
     public Boolean getReturnToSender() {
         return returnToSender;
     }
@@ -492,59 +343,64 @@ public class Tracking {
         this.returnToSender = returnToSender;
     }
 
-    public Object getTrackingAccountNumber() {
-        return trackingAccountNumber;
-    }
 
-    public void setTrackingAccountNumber(Object trackingAccountNumber) {
-        this.trackingAccountNumber = trackingAccountNumber;
-    }
-
-    public Object getTrackingOriginCountry() {
+    public String
+    getTrackingOriginCountry() {
         return trackingOriginCountry;
     }
 
-    public void setTrackingOriginCountry(Object trackingOriginCountry) {
+    public void setTrackingOriginCountry(String
+                                                 trackingOriginCountry) {
         this.trackingOriginCountry = trackingOriginCountry;
     }
 
-    public Object getTrackingDestinationCountry() {
+    public String
+    getTrackingDestinationCountry() {
         return trackingDestinationCountry;
     }
 
-    public void setTrackingDestinationCountry(Object trackingDestinationCountry) {
+    public void setTrackingDestinationCountry(String
+                                                      trackingDestinationCountry) {
         this.trackingDestinationCountry = trackingDestinationCountry;
     }
 
-    public Object getTrackingKey() {
+    public String
+    getTrackingKey() {
         return trackingKey;
     }
 
-    public void setTrackingKey(Object trackingKey) {
+    public void setTrackingKey(String
+                                       trackingKey) {
         this.trackingKey = trackingKey;
     }
 
-    public Object getTrackingPostalCode() {
+    public String
+    getTrackingPostalCode() {
         return trackingPostalCode;
     }
 
-    public void setTrackingPostalCode(Object trackingPostalCode) {
+    public void setTrackingPostalCode(String
+                                              trackingPostalCode) {
         this.trackingPostalCode = trackingPostalCode;
     }
 
-    public Object getTrackingShipDate() {
+    public String
+    getTrackingShipDate() {
         return trackingShipDate;
     }
 
-    public void setTrackingShipDate(Object trackingShipDate) {
+    public void setTrackingShipDate(String
+                                            trackingShipDate) {
         this.trackingShipDate = trackingShipDate;
     }
 
-    public Object getTrackingState() {
+    public String
+    getTrackingState() {
         return trackingState;
     }
 
-    public void setTrackingState(Object trackingState) {
+    public void setTrackingState(String
+                                         trackingState) {
         this.trackingState = trackingState;
     }
 
@@ -556,14 +412,6 @@ public class Tracking {
         this.orderPromisedDeliveryDate = orderPromisedDeliveryDate;
     }
 
-    public String getDeliveryType() {
-        return deliveryType;
-    }
-
-    public void setDeliveryType(String deliveryType) {
-        this.deliveryType = deliveryType;
-    }
-
     public String getPickupLocation() {
         return pickupLocation;
     }
@@ -572,12 +420,5 @@ public class Tracking {
         this.pickupLocation = pickupLocation;
     }
 
-    public Object getPickupNote() {
-        return pickupNote;
-    }
-
-    public void setPickupNote(Object pickupNote) {
-        this.pickupNote = pickupNote;
-    }
 
 }

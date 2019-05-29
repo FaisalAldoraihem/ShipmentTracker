@@ -40,7 +40,7 @@
         tools:text="In Transit. MEMPHIS" />
 
     <TextView
-        android:id="@+id/last_update"
+        android:id="@+id/slug"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

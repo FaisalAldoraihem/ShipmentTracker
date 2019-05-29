@@ -3,52 +3,52 @@ package com.faisal.shipmenttracker.POJO;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 public class Checkpoint {
 
     @SerializedName("slug")
     @Expose
-    private String slug;
+    public String slug;
     @SerializedName("city")
     @Expose
-    private Object city;
+    public String city;
     @SerializedName("created_at")
     @Expose
-    private String createdAt;
+    public String createdAt;
     @SerializedName("location")
     @Expose
-    private String location;
+    public String location;
     @SerializedName("country_name")
     @Expose
-    private String countryName;
+    public String countryName;
     @SerializedName("message")
     @Expose
-    private String message;
+    public String message;
     @SerializedName("country_iso3")
     @Expose
-    private String countryIso3;
+    public String countryIso3;
     @SerializedName("tag")
     @Expose
-    private String tag;
+    public String tag;
     @SerializedName("subtag")
     @Expose
-    private String subtag;
+    public String subtag;
     @SerializedName("subtag_message")
     @Expose
-    private String subtagMessage;
+    public String subtagMessage;
     @SerializedName("checkpoint_time")
     @Expose
-    private String checkpointTime;
-    @SerializedName("coordinates")
-    @Expose
-    private List<Object> coordinates = null;
+    public String checkpointTime;
     @SerializedName("state")
     @Expose
-    private Object state;
+    public String state;
     @SerializedName("zip")
     @Expose
-    private Object zip;
+    public String zip;
 
     public String getSlug() {
         return slug;
@@ -58,12 +58,8 @@ public class Checkpoint {
         this.slug = slug;
     }
 
-    public Object getCity() {
+    public String getCity() {
         return city;
-    }
-
-    public void setCity(Object city) {
-        this.city = city;
     }
 
     public String getCreatedAt() {
@@ -138,28 +134,15 @@ public class Checkpoint {
         this.checkpointTime = checkpointTime;
     }
 
-    public List<Object> getCoordinates() {
-        return coordinates;
-    }
 
-    public void setCoordinates(List<Object> coordinates) {
-        this.coordinates = coordinates;
-    }
-
-    public Object getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(Object state) {
-        this.state = state;
-    }
 
-    public Object getZip() {
+    public String getZip() {
         return zip;
     }
 
-    public void setZip(Object zip) {
-        this.zip = zip;
-    }
 
 }

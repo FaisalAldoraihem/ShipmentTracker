@@ -32,6 +32,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
     implementation 'com.google.android.material:material:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.viewpager:viewpager:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
 
     implementation "de.hdodenhof:circleimageview:$rootProject.CircleImageView"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.Retrofit"
@@ -42,8 +45,6 @@ dependencies {
     implementation "com.jakewharton:butterknife:$rootProject.Butterknife"
     annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.Butterknife"
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.Okhttp"
-    implementation 'androidx.viewpager:viewpager:1.0.0'
-    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
-
-
+    implementation "org.parceler:parceler-api:$rootProject.parcler"
+    annotationProcessor "org.parceler:parceler:$rootProject.parcler"
 }

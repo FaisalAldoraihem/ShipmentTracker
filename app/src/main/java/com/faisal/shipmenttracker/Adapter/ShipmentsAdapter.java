@@ -10,11 +10,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
-import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
 
 import java.util.List;
@@ -25,21 +23,25 @@ import butterknife.ButterKnife;
 public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.ShipmentAdapterViewHolder> {
 
     private List<Tracking> mShipments;
-    private final ShipmentsFragment.onClickListener mClickHandler;
+    private final ShipmentsOnClickHandler onClick;
 
-    public ShipmentsAdapter(List<Tracking> mShipments,
-                            ShipmentsFragment.onClickListener mClickHandler) {
+    public interface ShipmentsOnClickHandler {
+        void onClick(View view);
+    }
+
+    public ShipmentsAdapter(List<Tracking> mShipments, ShipmentsOnClickHandler onClick) {
         this.mShipments = mShipments;
-        this.mClickHandler = mClickHandler;
+        this.onClick = onClick;
     }
 
     public class ShipmentAdapterViewHolder extends RecyclerView.ViewHolder
-            implements View.OnClickListener{
+            implements View.OnClickListener {
+
         @BindView(R.id.shipping_title)
         TextView title;
         @BindView(R.id.last_destination)
         TextView lastDestination;
-        @BindView(R.id.last_update)
+        @BindView(R.id.slug)
         TextView lastUpdate;
         @BindView(R.id.textViewOptions)
         TextView options;
@@ -52,18 +54,13 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
             itemView.setOnClickListener(this);
         }
 
-        @Override
-        public void onClick(View view) {
-            mClickHandler.onClick(view);
-        }
-
         void bind(int position) {
             int last = mShipments.get(position).getCheckpoints().size();
             String lastDes = mShipments.get(position).getCheckpoints().get(last - 1).getMessage();
 
             title.setText(mShipments.get(position).getTitle());
             lastDestination.setText(lastDes);
-            lastUpdate.setText(mShipments.get(position).getLastUpdatedAt());
+            lastUpdate.setText(getTime(mShipments.get(position).getLastUpdatedAt()));
             itemView.setTag(position);
 
             options.setOnClickListener(view -> {
@@ -86,6 +83,10 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
             });
         }
 
+        @Override
+        public void onClick(View view) {
+            onClick.onClick(view);
+        }
     }
 
     @NonNull
@@ -115,6 +116,12 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         } else {
             return mShipments.size();
         }
+    }
+
+    private String getTime(String time){
+        String hours = time.substring(11,19);
+        hours = hours.substring(0,2) + "h" + hours.substring(3,5) + "m ago";
+        return hours;
     }
 
     public void setShipments(List<Tracking> shipments) {

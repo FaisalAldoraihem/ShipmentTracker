@@ -9,11 +9,15 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.TextView;
 
 import com.faisal.shipmenttracker.BuildConfig;
 import com.faisal.shipmenttracker.R;
@@ -29,7 +33,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity implements ShipmentsFragment.onClickListener {
+public class MainActivity extends AppCompatActivity  {
 
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
@@ -37,6 +41,12 @@ public class MainActivity extends AppCompatActivity implements ShipmentsFragment
     ViewPager mViewPager;
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
+    @BindView(R.id.swipe)
+    SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.no_network)
+    TextView mNoNetwork;
+
+    static boolean isConnected;
 
     public static String id;
     FragmentPagerAdapter adapterViewPager;
@@ -51,6 +61,18 @@ public class MainActivity extends AppCompatActivity implements ShipmentsFragment
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
+        }
+
+        ConnectivityManager cm =
+                (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        isConnected = activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting();
+
+        if (isConnected) {
+            mNoNetwork.setVisibility(View.INVISIBLE);
+
         }
 
         setup();
@@ -77,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements ShipmentsFragment
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapterViewPager);
         tabLayout.setupWithViewPager(mViewPager);
+
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            finish();
+            startActivity(getIntent());
+        });
     }
 
     @Override
@@ -89,10 +116,7 @@ public class MainActivity extends AppCompatActivity implements ShipmentsFragment
         }
     }
 
-    @Override
-    public void onClick(View view) {
-        Timber.e("It does");
-    }
+
 
     public static class MyPagerAdapter extends FragmentPagerAdapter {
         private Fragment[] childFragments;
