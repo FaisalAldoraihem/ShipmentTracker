@@ -39,6 +39,7 @@ dependencies {
     implementation "de.hdodenhof:circleimageview:$rootProject.CircleImageView"
     implementation "com.squareup.retrofit2:retrofit:$rootProject.Retrofit"
     implementation "androidx.room:room-runtime:$rootProject.Room"
+    annotationProcessor "androidx.room:room-compiler:$rootProject.Room"
     implementation "com.google.code.gson:gson:$rootProject.gson"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.gson_converter"
     implementation "com.jakewharton.timber:timber:$rootProject.Timber"

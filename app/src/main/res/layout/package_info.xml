@@ -7,7 +7,7 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/slug"
+        android:id="@+id/last_update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -19,7 +19,7 @@
         tools:text="Fedex" />
 
     <TextView
-        android:id="@+id/tracking"
+        android:id="@+id/last_location"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -27,10 +27,11 @@
         android:textColor="@color/secondaryText"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/slug"
+        app:layout_constraintTop_toBottomOf="@+id/last_update"
         tools:text="123456789" />
 
     <FrameLayout
+        android:id="@+id/checkpoints"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -39,7 +40,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tracking">
+        app:layout_constraintTop_toBottomOf="@+id/last_location">
 
     </FrameLayout>
 

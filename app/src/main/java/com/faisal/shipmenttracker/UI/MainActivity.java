@@ -5,7 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -20,29 +21,33 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.faisal.shipmenttracker.BuildConfig;
+import com.faisal.shipmenttracker.Database.ShipmentEntry;
 import com.faisal.shipmenttracker.R;
 
 import com.faisal.shipmenttracker.Shipment.ShipmentInfo;
 import com.faisal.shipmenttracker.Shipment.Tracking;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
+import com.faisal.shipmenttracker.ViewModels.DBViewModel;
+import com.faisal.shipmenttracker.ViewModels.ShipmentsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
+    DBViewModel dbViewModel;
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
     @BindView(R.id.viewPager)
     ViewPager mViewPager;
     @BindView(R.id.tablayout)
     TabLayout tabLayout;
-    @BindView(R.id.swipe)
-    SwipeRefreshLayout swipeRefreshLayout;
     @BindView(R.id.no_network)
     TextView mNoNetwork;
 
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity  {
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
+
 
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -100,10 +106,6 @@ public class MainActivity extends AppCompatActivity  {
         mViewPager.setAdapter(adapterViewPager);
         tabLayout.setupWithViewPager(mViewPager);
 
-        swipeRefreshLayout.setOnRefreshListener(() -> {
-            finish();
-            startActivity(getIntent());
-        });
     }
 
     @Override
@@ -151,6 +153,7 @@ public class MainActivity extends AppCompatActivity  {
                 return "Archive";
             }
         }
-
     }
+
+
 }

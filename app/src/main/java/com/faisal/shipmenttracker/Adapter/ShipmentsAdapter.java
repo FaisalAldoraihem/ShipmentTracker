@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.faisal.shipmenttracker.Database.ShipmentEntry;
 import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
@@ -24,14 +25,16 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
 
     private List<Tracking> mShipments;
     private final ShipmentsOnClickHandler onClick;
+    private Context context;
 
     public interface ShipmentsOnClickHandler {
         void onClick(View view);
     }
 
-    public ShipmentsAdapter(List<Tracking> mShipments, ShipmentsOnClickHandler onClick) {
+    public ShipmentsAdapter(List<Tracking> mShipments, ShipmentsOnClickHandler onClick,Context context) {
         this.mShipments = mShipments;
         this.onClick = onClick;
+        this.context = context;
     }
 
     public class ShipmentAdapterViewHolder extends RecyclerView.ViewHolder
@@ -41,7 +44,7 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         TextView title;
         @BindView(R.id.last_destination)
         TextView lastDestination;
-        @BindView(R.id.slug)
+        @BindView(R.id.last_update)
         TextView lastUpdate;
         @BindView(R.id.textViewOptions)
         TextView options;
@@ -70,7 +73,8 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
                 menu.setOnMenuItemClickListener(item -> {
                     switch (item.getItemId()) {
                         case R.id.menu1:
-
+                            ShipmentEntry entry = new ShipmentEntry(mShipments.get(position));
+                            new ShipmentsUtils().addToDatabase(entry,context);
                             break;
                         case R.id.menu2:
                             new ShipmentsUtils().deleteShipment(mShipments.get(position).getSlug(),
