@@ -6,11 +6,22 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/no_archived_shipments"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/new_shipment"
+        android:layout_marginTop="250dp"
+        android:text="@string/no_Archived_shipments"
+        android:textSize="18sp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/archived_shipments"
+        app:layout_constraintStart_toStartOf="@+id/archived_shipments"
+        app:layout_constraintTop_toTopOf="@+id/archived_shipments" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/archived_shipments"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

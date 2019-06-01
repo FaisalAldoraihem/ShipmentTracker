@@ -22,7 +22,7 @@ public class ShipmentDetail extends AppCompatActivity {
     CheckpointsFragment mCheckpointsFragment;
     Tracking mTracking;
 
-    @BindView(R.id.last_update)
+    @BindView(R.id.expected_delivery)
     TextView mSlug;
     @BindView(R.id.last_location)
     TextView mTrackingText;

@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,12 +25,11 @@ import butterknife.ButterKnife;
 public class CheckpointsFragment extends Fragment{
 
     private View mRootView;
-    List<Checkpoint> mCheckpoints;
+    private List<Checkpoint> mCheckpoints;
+    CheckpointsAdapter adapter;
 
     @BindView(R.id.checkpoints)
     RecyclerView mCheckPointsList;
-
-    CheckpointsAdapter adapter;
 
     public CheckpointsFragment() {
     }
@@ -44,6 +42,7 @@ public class CheckpointsFragment extends Fragment{
                     container, false);
         }
         ButterKnife.bind(this, mRootView);
+
         if(getArguments() !=null){
             mCheckpoints = Parcels.unwrap(getArguments().getParcelable(ShipmentDetail.CHECKPOINTS));
             adapter = new CheckpointsAdapter(mCheckpoints);

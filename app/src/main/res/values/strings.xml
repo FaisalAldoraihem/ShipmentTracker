@@ -4,11 +4,12 @@
     <string name="tracking_number">Tracking Number</string>
     <string name="title_hint">Title(optional)</string>
     <string name="carrier">Carrier</string>
-    <string name="done">Done</string>
+    <string name="done">DONE</string>
     <string name="cancel">CANCEL</string>
     <string name="dots">&#8942;</string>
     <string name="Archive">Archive</string>
     <string name="Delete">Delete</string>
     <string name="no_network">Could Not Connect To the Network</string>
     <string name="no_shipments">No Shipments</string>
+    <string name="no_Archived_shipments">No Archived Shipments</string>
 </resources>

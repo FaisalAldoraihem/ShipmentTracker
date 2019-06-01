@@ -28,7 +28,7 @@ task clean(type: Delete) {
 
 ext{
     CircleImageView = '3.0.0'
-    Room = '2.1.0-beta01'
+    Room = '2.1.0-rc01'
     Retrofit = '2.5.0'
     gson = '2.8.5'
     gson_converter = '2.5.0'

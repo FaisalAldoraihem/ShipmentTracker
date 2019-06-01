@@ -20,20 +20,15 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
+import com.faisal.shipmenttracker.Adapter.MyPagerAdapter;
 import com.faisal.shipmenttracker.BuildConfig;
-import com.faisal.shipmenttracker.Database.ShipmentEntry;
 import com.faisal.shipmenttracker.R;
 
 import com.faisal.shipmenttracker.Shipment.ShipmentInfo;
 import com.faisal.shipmenttracker.Shipment.Tracking;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
-import com.faisal.shipmenttracker.ViewModels.DBViewModel;
-import com.faisal.shipmenttracker.ViewModels.ShipmentsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,7 +36,6 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
 
-    DBViewModel dbViewModel;
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
     @BindView(R.id.viewPager)
@@ -61,13 +55,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
         setTitle("Packages");
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
-
 
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -78,15 +70,17 @@ public class MainActivity extends AppCompatActivity {
 
         if (isConnected) {
             mNoNetwork.setVisibility(View.INVISIBLE);
-
         }
-
         setup();
     }
 
     private void postTracking(Intent data) {
         String tracking = data.getStringExtra(Popup.TRACKING);
         String title = data.getStringExtra(Popup.TITLE);
+        if(tracking.isEmpty()){
+            return;
+        }
+
         if (TextUtils.isEmpty(title)) {
             new ShipmentsUtils().postTracking(new Tracking(new ShipmentInfo(tracking, id)), this);
         } else {
@@ -117,43 +111,5 @@ public class MainActivity extends AppCompatActivity {
             Timber.d("NA");
         }
     }
-
-
-
-    public static class MyPagerAdapter extends FragmentPagerAdapter {
-        private Fragment[] childFragments;
-
-        MyPagerAdapter(FragmentManager fragmentManager) {
-            super(fragmentManager);
-
-            childFragments = new Fragment[]{
-                    new ShipmentsFragment(),
-                    new ArchiveFragment()
-            };
-        }
-
-        // Returns total number of pages
-        @Override
-        public int getCount() {
-            return childFragments.length;
-        }
-
-
-        @Override
-        public Fragment getItem(int position) {
-            return childFragments[position];
-        }
-
-        // Returns the page title for the top indicator
-        @Override
-        public CharSequence getPageTitle(int position) {
-            if (position == 0) {
-                return "In Transit";
-            } else {
-                return "Archive";
-            }
-        }
-    }
-
 
 }

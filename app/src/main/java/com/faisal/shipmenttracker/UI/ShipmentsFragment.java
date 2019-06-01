@@ -29,13 +29,14 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ShipmentsFragment extends Fragment implements ShipmentsAdapter.ShipmentsOnClickHandler {
+public class ShipmentsFragment extends Fragment
+        implements ShipmentsAdapter.ShipmentsOnClickHandler {
 
-    public static String SHIPPING = "shipping";
+    static String SHIPPING = "shipping";
     private List<Tracking> mShipmentsData;
     private View mRootView;
     private ShipmentsAdapter adapter;
-    private ShipmentsViewModel mShipmentsViewModel;
+    private static ShipmentsViewModel mShipmentsViewModel;
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -43,7 +44,7 @@ public class ShipmentsFragment extends Fragment implements ShipmentsAdapter.Ship
     RecyclerView mShipments;
     @BindView(R.id.swipe)
     SwipeRefreshLayout mSwipeRefreshLayout;
-    @BindView(R.id.no_shipments)
+    @BindView(R.id.no_archived_shipments)
     TextView mNoShipments;
 
     public ShipmentsFragment() {
@@ -52,13 +53,14 @@ public class ShipmentsFragment extends Fragment implements ShipmentsAdapter.Ship
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         if (mRootView == null) {
             mRootView = inflater.inflate(R.layout.shipment_fragment,
                     container, false);
         }
         ButterKnife.bind(this, mRootView);
-        adapter = new ShipmentsAdapter(null, this,getContext());
+        adapter = new ShipmentsAdapter(null, this, getContext());
         mShipments.setAdapter(adapter);
         mShipments.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -80,7 +82,7 @@ public class ShipmentsFragment extends Fragment implements ShipmentsAdapter.Ship
     }
 
     private void setupViewModel() {
-        mShipmentsViewModel.getmShipments().observe(this, shipment -> {
+        mShipmentsViewModel.getmShipments().observe(getViewLifecycleOwner(), shipment -> {
             if (shipment != null) {
                 mShipmentsData = shipment.getData().getTrackings();
                 adapter.setShipments(mShipmentsData);
@@ -98,7 +100,13 @@ public class ShipmentsFragment extends Fragment implements ShipmentsAdapter.Ship
         } else if (mShipmentsData.isEmpty()) {
             progressBar.setVisibility(View.INVISIBLE);
             mNoShipments.setVisibility(View.VISIBLE);
+        } else {
+            mNoShipments.setVisibility(View.INVISIBLE);
         }
+    }
+
+    public static void refresh(){
+        mShipmentsViewModel.fetchShipments();
     }
 
     @Override

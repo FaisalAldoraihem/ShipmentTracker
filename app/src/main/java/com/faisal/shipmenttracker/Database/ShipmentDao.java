@@ -15,7 +15,7 @@ public interface ShipmentDao {
     @Query("SELECT * FROM  Shipment")
     LiveData<List<ShipmentEntry>> laodAllShipments();
 
-    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertShipment(ShipmentEntry shipmentEntry);
 
     @Delete

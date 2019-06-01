@@ -12,19 +12,18 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.faisal.shipmenttracker.Database.ShipmentEntry;
-import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
-import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
+
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.ShipmentAdapterViewHolder> {
+public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipmentAdapter.ArchivedShipmentAdapterViewHolder> {
 
-    private List<Tracking> mShipments;
+    private List<ShipmentEntry> mShipments;
     private final ShipmentsOnClickHandler onClick;
     private Context context;
 
@@ -32,13 +31,13 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         void onClick(View view);
     }
 
-    public ShipmentsAdapter(List<Tracking> mShipments, ShipmentsOnClickHandler onClick, Context context) {
+    public ArchivedShipmentAdapter(List<ShipmentEntry> mShipments, ShipmentsOnClickHandler onClick, Context context) {
         this.mShipments = mShipments;
         this.onClick = onClick;
         this.context = context;
     }
 
-    public class ShipmentAdapterViewHolder extends RecyclerView.ViewHolder
+    public class ArchivedShipmentAdapterViewHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
 
         @BindView(R.id.shipping_title)
@@ -52,17 +51,17 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         @BindView(R.id.carrier_img)
         ImageView mCarrierImg;
 
-        public ShipmentAdapterViewHolder(@NonNull View itemView) {
+        public ArchivedShipmentAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 
         void bind(int position) {
-            int shipmentsSize = mShipments.get(position).getCheckpoints().size();
-            String title = mShipments.get(position).getTitle();
-            String lastDes = mShipments.get(position).getCheckpoints().get(shipmentsSize - 1).getMessage();
-            String expectedDelivery = mShipments.get(position).getExpectedDelivery();
+            int shipmentsSize = mShipments.get(position).getTracking().getCheckpoints().size();
+            String title = mShipments.get(position).getTracking().getTitle();
+            String lastDes = mShipments.get(position).getTracking().getCheckpoints().get(shipmentsSize - 1).getMessage();
+            String expectedDelivery = mShipments.get(position).getTracking().getExpectedDelivery();
 
 
             mTitle.setText(title);
@@ -79,9 +78,10 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         }
     }
 
+
     @NonNull
     @Override
-    public ShipmentAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ArchivedShipmentAdapterViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
 
         int layoutIdForListItem = R.layout.shipment_list_item;
@@ -90,12 +90,11 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
 
         View view = inflater.inflate(layoutIdForListItem, parent, false);
 
-        return new ShipmentAdapterViewHolder(view);
-
+        return new ArchivedShipmentAdapterViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShipmentAdapterViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ArchivedShipmentAdapterViewHolder holder, int position) {
         holder.bind(position);
     }
 
@@ -108,30 +107,22 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         }
     }
 
-    public void setShipments(List<Tracking> shipments) {
+    public void setShipments(List<ShipmentEntry> shipments) {
         mShipments = shipments;
         notifyDataSetChanged();
     }
 
     private void setListeners(TextView options, int position) {
-        ShipmentEntry entry = new ShipmentEntry(mShipments.get(position).getId(),
-                mShipments.get(position));
+        ShipmentEntry entry = new ShipmentEntry(mShipments.get(position).getTracking().getId(),
+                mShipments.get(position).getTracking());
 
         options.setOnClickListener(view -> {
             PopupMenu menu = new PopupMenu(view.getContext(), options);
-            menu.inflate(R.menu.options_menu);
+            menu.inflate(R.menu.archive_options);
 
             menu.setOnMenuItemClickListener(item -> {
-                switch (item.getItemId()) {
-                    case R.id.menu1:
-                        new ShipmentsUtils().addToDatabase(entry, context);
-                        break;
-
-                    case R.id.menu2:
-                        new ShipmentsUtils().deleteShipment(mShipments.get(position).getSlug(),
-                                mShipments.get(position).getTrackingNumber());
-                        ShipmentsFragment.refresh();
-                        break;
+                if (item.getItemId() == R.id.archive_menu) {
+                    new ShipmentsUtils().deleteFromDatabase(entry, context);
                 }
                 return false;
             });

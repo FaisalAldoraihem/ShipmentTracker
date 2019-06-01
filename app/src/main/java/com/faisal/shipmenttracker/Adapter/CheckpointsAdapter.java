@@ -30,7 +30,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
 
 
     public class CheckpointsAdapterViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.last_update)
+        @BindView(R.id.expected_delivery)
         TextView lastUpdate;
         @BindView(R.id.last_location)
         TextView lastLocation;
