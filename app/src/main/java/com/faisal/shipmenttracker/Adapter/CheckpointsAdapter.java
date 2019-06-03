@@ -34,7 +34,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
         TextView lastUpdate;
         @BindView(R.id.last_location)
         TextView lastLocation;
-        @BindView(R.id.date)
+        @BindView(R.id.delivery_date)
         TextView checkpointDate;
 
         public CheckpointsAdapterViewHolder(@NonNull View itemView) {

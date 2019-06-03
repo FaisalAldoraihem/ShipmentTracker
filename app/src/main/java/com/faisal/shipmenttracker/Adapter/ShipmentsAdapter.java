@@ -70,6 +70,7 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
             mExpected.setText(expectedDelivery);
             itemView.setTag(position);
 
+            setImage(mCarrierImg,position);
             setListeners(mOptions, position);
         }
 
@@ -138,5 +139,32 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
             menu.show();
         });
 
+    }
+
+    private void setImage(ImageView image, int pos) {
+        switch (mShipments.get(pos).getSlug()) {
+            case "fedex":
+                image.setImageResource(R.drawable.fedex);
+                break;
+
+            case "ups":
+                image.setImageResource(R.drawable.ups);
+                break;
+
+            case "usps":
+                image.setImageResource(R.drawable.usps);
+                break;
+
+            case "saudi-post":
+                image.setImageResource(R.drawable.saudi);
+                break;
+
+            case "dhl-express":
+                image.setImageResource(R.drawable.dhl);
+                break;
+            default:
+                image.setImageResource(R.drawable.fedex);
+                break;
+        }
     }
 }

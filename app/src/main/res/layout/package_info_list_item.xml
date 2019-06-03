@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
+        android:contentDescription="@string/last_update"
         android:maxLength="25"
         android:textColor="@color/primaryText"
         tools:text="Arrived" />
@@ -21,16 +22,18 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/last_location"
         android:textColor="@color/secondaryText"
         tools:text="Here" />
 
     <TextView
-        android:id="@+id/date"
+        android:id="@+id/delivery_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/update_date"
         android:marqueeRepeatLimit="marquee_forever"
         android:textColor="@color/primaryText"
         tools:text="27 May" />

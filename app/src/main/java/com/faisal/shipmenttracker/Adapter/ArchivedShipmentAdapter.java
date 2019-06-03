@@ -1,6 +1,8 @@
 package com.faisal.shipmenttracker.Adapter;
 
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,6 +117,8 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
     private void setListeners(TextView options, int position) {
         ShipmentEntry entry = new ShipmentEntry(mShipments.get(position).getTracking().getId(),
                 mShipments.get(position).getTracking());
+        Intent intent = new Intent(context, ShipmentsUtils.class);
+        intent.setAction(ShipmentsUtils.ACTION_REMOVE_FROM_DATABASE);
 
         options.setOnClickListener(view -> {
             PopupMenu menu = new PopupMenu(view.getContext(), options);
@@ -122,7 +126,7 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
 
             menu.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.archive_menu) {
-                    new ShipmentsUtils().deleteFromDatabase(entry, context);
+                    context.startService(intent);
                 }
                 return false;
             });

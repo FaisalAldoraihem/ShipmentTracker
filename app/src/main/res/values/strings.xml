@@ -12,4 +12,18 @@
     <string name="no_network">Could Not Connect To the Network</string>
     <string name="no_shipments">No Shipments</string>
     <string name="no_Archived_shipments">No Archived Shipments</string>
+    <string name="weight">Weight</string>
+    <string name="from">From</string>
+    <string name="To">To</string>
+    <string name="Route">Route</string>
+    <string name="deliveryDate">Delivery by</string>
+    <string name="title_content_des">title text field</string>
+    <string name="tracking_content_des">Tracking number text field</string>
+    <string name="archive_content_des">Archived shipments</string>
+    <string name="checkpoint_content_des">Check points</string>
+    <string name="last_location">Last location</string>
+    <string name="last_update">Last update</string>
+    <string name="update_date">Date of the update</string>
+    <string name="shipping_title">Shipping title</string>
+    <string name="options_des">Options</string>
 </resources>

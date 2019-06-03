@@ -9,6 +9,7 @@
         android:id="@+id/checkpoints"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:contentDescription="@string/checkpoint_content_des"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

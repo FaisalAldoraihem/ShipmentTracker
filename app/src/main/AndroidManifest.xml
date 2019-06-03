@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".UI.Popup" android:theme="@style/Popup"/>
         <activity android:name=".UI.ShipmentDetail" android:parentActivityName=".UI.MainActivity"/>
+
+        <service android:name=".Utils.ShipmentsUtils" />
     </application>
 
 </manifest>

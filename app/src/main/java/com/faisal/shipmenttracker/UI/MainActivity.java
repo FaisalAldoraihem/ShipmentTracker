@@ -30,6 +30,8 @@ import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
+import org.parceler.Parcels;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import timber.log.Timber;
@@ -77,14 +79,24 @@ public class MainActivity extends AppCompatActivity {
     private void postTracking(Intent data) {
         String tracking = data.getStringExtra(Popup.TRACKING);
         String title = data.getStringExtra(Popup.TITLE);
-        if(tracking.isEmpty()){
+        if (tracking.isEmpty()) {
             return;
         }
 
         if (TextUtils.isEmpty(title)) {
-            new ShipmentsUtils().postTracking(new Tracking(new ShipmentInfo(tracking, id)), this);
+            Intent intent = new Intent(this, ShipmentsUtils.class);
+            intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
+            Tracking tracking1 = new Tracking(new ShipmentInfo(tracking, id));
+            intent.putExtra(ShipmentsUtils.TRACKING_OBJECT, Parcels.wrap(tracking1));
+
+            startService(intent);
         } else {
-            new ShipmentsUtils().postTracking(new Tracking(new ShipmentInfo(tracking, title, id)), this);
+            Intent intent = new Intent(this, ShipmentsUtils.class);
+            intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
+            Tracking tracking1 = new Tracking(new ShipmentInfo(tracking, title, id));
+            intent.putExtra(ShipmentsUtils.TRACKING_OBJECT, Parcels.wrap(tracking1));
+
+            startService(intent);
         }
     }
 
