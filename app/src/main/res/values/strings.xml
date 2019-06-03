@@ -26,4 +26,6 @@
     <string name="update_date">Date of the update</string>
     <string name="shipping_title">Shipping title</string>
     <string name="options_des">Options</string>
+    <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
 </resources>

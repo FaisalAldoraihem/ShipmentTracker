@@ -2,17 +2,25 @@ package com.faisal.shipmenttracker.Database;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 import com.faisal.shipmenttracker.POJO.Tracking;
 
+import org.parceler.Parcel;
+
 
 @Entity(tableName = "Shipment")
+@Parcel
 public class ShipmentEntry {
     @PrimaryKey
     @NonNull
-    private String id;
-    private Tracking tracking;
+    public String id;
+    public Tracking tracking;
+
+    @Ignore
+    public ShipmentEntry() {
+    }
 
     public ShipmentEntry(String id, Tracking tracking) {
         this.id = id;

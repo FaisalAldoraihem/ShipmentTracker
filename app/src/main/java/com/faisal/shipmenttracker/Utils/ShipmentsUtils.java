@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import com.faisal.shipmenttracker.Database.ArchiveDatabase;
 import com.faisal.shipmenttracker.Database.ShipmentEntry;
 import com.faisal.shipmenttracker.Shipment.Tracking;
+import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -36,8 +37,8 @@ public class ShipmentsUtils extends IntentService {
     private ArchiveDatabase dbM;
 
 
-    public ShipmentsUtils(String name) {
-        super(name);
+    public ShipmentsUtils() {
+        super("ShipmentsUtils");
     }
 
     @Override
@@ -46,10 +47,10 @@ public class ShipmentsUtils extends IntentService {
             final String action = intent.getAction();
             switch (action){
                 case ACTION_ADD_TOO_DATABASE:
-
+                    addToDatabase(Parcels.unwrap(intent.getParcelableExtra(SHIPMENT_OBJECT)));
                     break;
                 case ACTION_REMOVE_FROM_DATABASE:
-
+                    deleteFromDatabase(Parcels.unwrap(intent.getParcelableExtra(SHIPMENT_OBJECT)));
                     break;
 
                 case ACTION_ADD_TOO_TRACKING:
@@ -57,7 +58,9 @@ public class ShipmentsUtils extends IntentService {
                     break;
 
                 case ACTION_REMOVE_FROM_TRACKING:
-
+                    String slug = intent.getStringExtra(SLUG);
+                    String tracking = intent.getStringExtra(TRACKING);
+                    deleteShipment(slug,tracking);
                     break;
             }
         }
@@ -70,6 +73,8 @@ public class ShipmentsUtils extends IntentService {
             public void onResponse(@NotNull Call<JSONObject> call, @NotNull Response<JSONObject> response) {
                 if (response.errorBody() != null) {
                     Toast.makeText(getApplicationContext(), "Tracking Already Exists", Toast.LENGTH_LONG).show();
+                }else{
+                    ShipmentsFragment.refresh();
                 }
             }
 
@@ -87,7 +92,7 @@ public class ShipmentsUtils extends IntentService {
         post.enqueue(new Callback<JSONObject>() {
             @Override
             public void onResponse(@NotNull Call<JSONObject> call, @NotNull Response<JSONObject> response) {
-
+                ShipmentsFragment.refresh();
             }
 
             @Override
@@ -95,6 +100,7 @@ public class ShipmentsUtils extends IntentService {
 
             }
         });
+
 
     }
 

@@ -3,21 +3,26 @@ package com.faisal.shipmenttracker.Shipment;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
 
+@Parcel
 public class ShipmentInfo {
 
     @SerializedName("tracking_number")
     @Expose
-    private String tracking_number;
+    String tracking_number;
     @SerializedName("slug")
     @Expose
-    private String slug;
+    String slug;
     @SerializedName("title")
     @Expose
-    private String title;
+    String title;
     @SerializedName("customer_name")
     @Expose
-    private String customer_name;
+    String customer_name;
+
+    public ShipmentInfo() {
+    }
 
     public ShipmentInfo(String tracking_number, String customer_name) {
         this.tracking_number = tracking_number;

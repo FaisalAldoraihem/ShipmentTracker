@@ -18,10 +18,13 @@ import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
 
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.http.POST;
 
 public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipmentAdapter.ArchivedShipmentAdapterViewHolder> {
 
@@ -71,6 +74,7 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
             mExpected.setText(expectedDelivery);
             itemView.setTag(position);
 
+            setImage(mCarrierImg, position);
             setListeners(mOptions, position);
         }
 
@@ -119,6 +123,7 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
                 mShipments.get(position).getTracking());
         Intent intent = new Intent(context, ShipmentsUtils.class);
         intent.setAction(ShipmentsUtils.ACTION_REMOVE_FROM_DATABASE);
+        intent.putExtra(ShipmentsUtils.SHIPMENT_OBJECT, Parcels.wrap(entry));
 
         options.setOnClickListener(view -> {
             PopupMenu menu = new PopupMenu(view.getContext(), options);
@@ -133,5 +138,32 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
             menu.show();
         });
 
+    }
+
+    private void setImage(ImageView image, int pos) {
+        switch (mShipments.get(pos).getTracking().getSlug()) {
+            case "fedex":
+                image.setImageResource(R.drawable.fedex);
+                break;
+
+            case "ups":
+                image.setImageResource(R.drawable.ups);
+                break;
+
+            case "usps":
+                image.setImageResource(R.drawable.usps);
+                break;
+
+            case "saudi-post":
+                image.setImageResource(R.drawable.saudi);
+                break;
+
+            case "dhl-express":
+                image.setImageResource(R.drawable.dhl);
+                break;
+            default:
+                image.setImageResource(R.drawable.fedex);
+                break;
+        }
     }
 }

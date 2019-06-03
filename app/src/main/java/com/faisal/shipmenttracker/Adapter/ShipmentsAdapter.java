@@ -1,6 +1,7 @@
 package com.faisal.shipmenttracker.Adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,10 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.faisal.shipmenttracker.Database.ShipmentEntry;
+import com.faisal.shipmenttracker.POJO.Shipment;
 import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
+
+import org.parceler.Parcels;
 
 import java.util.List;
 
@@ -118,6 +122,16 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         ShipmentEntry entry = new ShipmentEntry(mShipments.get(position).getId(),
                 mShipments.get(position));
 
+        Intent intent = new Intent(context, ShipmentsUtils.class);
+        intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_DATABASE);
+        intent.putExtra(ShipmentsUtils.SHIPMENT_OBJECT, Parcels.wrap(entry));
+
+        Intent deleteShipment = new Intent(context,ShipmentsUtils.class);
+        deleteShipment.setAction(ShipmentsUtils.ACTION_REMOVE_FROM_TRACKING);
+        deleteShipment.putExtra(ShipmentsUtils.SLUG,mShipments.get(position).getSlug());
+        deleteShipment.putExtra(ShipmentsUtils.TRACKING,mShipments.get(position).getTrackingNumber());
+
+
         options.setOnClickListener(view -> {
             PopupMenu menu = new PopupMenu(view.getContext(), options);
             menu.inflate(R.menu.options_menu);
@@ -125,13 +139,11 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
             menu.setOnMenuItemClickListener(item -> {
                 switch (item.getItemId()) {
                     case R.id.menu1:
-                        new ShipmentsUtils().addToDatabase(entry, context);
+                        context.startService(intent);
                         break;
 
                     case R.id.menu2:
-                        new ShipmentsUtils().deleteShipment(mShipments.get(position).getSlug(),
-                                mShipments.get(position).getTrackingNumber());
-                        ShipmentsFragment.refresh();
+                        context.startService(deleteShipment);
                         break;
                 }
                 return false;

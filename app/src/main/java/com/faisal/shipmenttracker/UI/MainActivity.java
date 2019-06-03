@@ -2,11 +2,9 @@ package com.faisal.shipmenttracker.UI;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
+
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
+
 import androidx.viewpager.widget.ViewPager;
 
 import android.annotation.SuppressLint;
@@ -27,6 +25,9 @@ import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.Shipment.ShipmentInfo;
 import com.faisal.shipmenttracker.Shipment.Tracking;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 
@@ -37,6 +38,7 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
+    private AdView mAdView;
 
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
@@ -58,6 +60,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         setTitle("Packages");
+        MobileAds.initialize(this, "ca-app-pub-8577762809608928~8578625843");
+
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
@@ -65,6 +72,8 @@ public class MainActivity extends AppCompatActivity {
 
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+
+
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         isConnected = activeNetwork != null &&
