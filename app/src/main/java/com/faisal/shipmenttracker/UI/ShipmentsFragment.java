@@ -59,7 +59,9 @@ public class ShipmentsFragment extends Fragment
             mRootView = inflater.inflate(R.layout.shipment_fragment,
                     container, false);
         }
+
         ButterKnife.bind(this, mRootView);
+
         adapter = new ShipmentsAdapter(null, this, getContext());
         mShipments.setAdapter(adapter);
         mShipments.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -69,19 +71,21 @@ public class ShipmentsFragment extends Fragment
 
         }
 
-        mShipmentsViewModel = ViewModelProviders.of(this).get(ShipmentsViewModel.class);
         setupViewModel();
-
-        mSwipeRefreshLayout.setOnRefreshListener(() -> {
-            mShipmentsViewModel.fetchShipments();
-            mSwipeRefreshLayout.setRefreshing(false);
-            checkShipments();
-        });
-
+        setupListener();
         return mRootView;
     }
 
+    private void setupListener() {
+        mSwipeRefreshLayout.setOnRefreshListener(() -> {
+            refresh();
+            mSwipeRefreshLayout.setRefreshing(false);
+            checkShipments();
+        });
+    }
+
     private void setupViewModel() {
+        mShipmentsViewModel = ViewModelProviders.of(this).get(ShipmentsViewModel.class);
         mShipmentsViewModel.getmShipments().observe(getViewLifecycleOwner(), shipment -> {
             if (shipment != null) {
                 mShipmentsData = shipment.getData().getTrackings();
@@ -105,7 +109,7 @@ public class ShipmentsFragment extends Fragment
         }
     }
 
-    public static void refresh(){
+    public static void refresh() {
         mShipmentsViewModel.fetchShipments();
     }
 

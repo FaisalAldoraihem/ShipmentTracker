@@ -34,7 +34,6 @@ public class ArchiveFragment extends Fragment
 
     private View mRootView;
     private ArchivedShipmentAdapter adapter;
-    private DBViewModel mViewModel;
     private List<ShipmentEntry> mArchivedShipmentsData;
 
     @BindView(R.id.archived_shipments)
@@ -53,18 +52,20 @@ public class ArchiveFragment extends Fragment
                     container, false);
         }
         ButterKnife.bind(this, mRootView);
-        adapter = new ArchivedShipmentAdapter(null, this, getContext());
-        mArchivedShipments.setAdapter(adapter);
-        mArchivedShipments.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        mViewModel = ViewModelProviders.of(this).get(DBViewModel.class);
-
+        setupView();
         setupViewModel();
 
         return mRootView;
     }
 
+    private void setupView(){
+        adapter = new ArchivedShipmentAdapter(null, this, getContext());
+        mArchivedShipments.setAdapter(adapter);
+        mArchivedShipments.setLayoutManager(new LinearLayoutManager(getContext()));
+    }
+
     private void setupViewModel() {
+        DBViewModel mViewModel = ViewModelProviders.of(this).get(DBViewModel.class);
         mViewModel.getmShipments().observe(getViewLifecycleOwner(), shipmentEntries -> {
             if (shipmentEntries != null) {
                 mArchivedShipmentsData = shipmentEntries;

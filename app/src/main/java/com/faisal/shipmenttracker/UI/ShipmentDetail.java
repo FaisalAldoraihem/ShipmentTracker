@@ -55,27 +55,18 @@ public class ShipmentDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.package_info);
         ButterKnife.bind(this);
+
         mTracking = Parcels.unwrap(getIntent().getParcelableExtra(ShipmentsFragment.SHIPPING));
         if (mTracking != null) {
             setupView();
         }
-        if(!hidden){
+
+        if (!hidden) {
             layout.setVisibility(View.VISIBLE);
             arrow.setImageResource(R.drawable.ic_arrow_drop_up);
         }
 
-        base.setOnClickListener(view -> {
-            hidden = !hidden;
-            if(!hidden){
-                layout.setVisibility(View.VISIBLE);
-                arrow.setImageResource(R.drawable.ic_arrow_drop_up);
-            }else {
-                layout.setVisibility(View.GONE);
-                arrow.setImageResource(R.drawable.ic_arrow_drop_down);
-            }
-        });
-
-
+        setupListener();
         setUpFragment();
     }
 
@@ -95,10 +86,23 @@ public class ShipmentDetail extends AppCompatActivity {
         }
     }
 
-    private void setupView(){
-        String route = mTracking.getOriginCountryIso3() + " -> " +mTracking.getCourierDestinationCountryIso3();
+    private void setupListener() {
+        base.setOnClickListener(view -> {
+            hidden = !hidden;
+            if (!hidden) {
+                layout.setVisibility(View.VISIBLE);
+                arrow.setImageResource(R.drawable.ic_arrow_drop_up);
+            } else {
+                layout.setVisibility(View.GONE);
+                arrow.setImageResource(R.drawable.ic_arrow_drop_down);
+            }
+        });
+    }
+
+    private void setupView() {
+        String route = mTracking.getOriginCountryIso3() + " -> " + mTracking.getCourierDestinationCountryIso3();
         String date = mTracking.getExpectedDelivery();
-        String weight = mTracking.getShipmentWeight() +" " + mTracking.getShipmentWeightUnit();
+        String weight = mTracking.getShipmentWeight() + " " + mTracking.getShipmentWeightUnit();
         String destination = mTracking.getCourierDestinationCountryIso3();
         String origin = mTracking.getOriginCountryIso3();
 
@@ -109,7 +113,7 @@ public class ShipmentDetail extends AppCompatActivity {
         mFrom.setText(origin);
         mDestination.setText(destination);
 
-        if(date == null){
+        if (date == null) {
             date = "Delivered";
         }
 

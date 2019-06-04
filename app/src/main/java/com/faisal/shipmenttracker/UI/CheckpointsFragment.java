@@ -30,7 +30,7 @@ public class CheckpointsFragment extends Fragment{
 
     @BindView(R.id.checkpoints)
     RecyclerView mCheckPointsList;
-
+ 
     public CheckpointsFragment() {
     }
 

@@ -17,6 +17,7 @@ import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.faisal.shipmenttracker.Adapter.MyPagerAdapter;
 import com.faisal.shipmenttracker.BuildConfig;
@@ -61,12 +62,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setTitle("Packages");
-        MobileAds.initialize(this, "ca-app-pub-8577762809608928~8578625843");
+        setTitle("Shipments");
 
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+        MobileAds.initialize(this, getString(R.string.app_id));
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         Bundle bundle = new Bundle();
@@ -77,11 +75,57 @@ public class MainActivity extends AppCompatActivity {
             Timber.plant(new Timber.DebugTree());
         }
 
+        setupView();
+        setupConnectivity();
+        setupAdds();
+    }
+
+    private void postTracking(Intent data) {
+        String tracking = data.getStringExtra(Popup.TRACKING);
+        String title = data.getStringExtra(Popup.TITLE);
+        Intent intent = new Intent(this, ShipmentsUtils.class);
+        intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
+
+        if (tracking.isEmpty()) {
+            return;
+        }
+
+        if (TextUtils.isEmpty(title)) {
+            Tracking trackingObj = new Tracking(new ShipmentInfo(tracking, id));
+            intent.putExtra(ShipmentsUtils.TRACKING_OBJECT, Parcels.wrap(trackingObj));
+            startService(intent);
+        } else {
+            Tracking trackingObj = new Tracking(new ShipmentInfo(tracking, title, id));
+            intent.putExtra(ShipmentsUtils.TRACKING_OBJECT, Parcels.wrap(trackingObj));
+            startService(intent);
+        }
+
+        Toast.makeText(this,"Please give the app  a minute too track the shipment",
+                Toast.LENGTH_LONG).show();
+    }
+
+    @SuppressLint("HardwareIds")
+    private void setupView() {
+        id = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+
+        mAddShipmentFab.setOnClickListener(view ->
+                startActivityForResult(new Intent(view.getContext(), Popup.class), 100));
+
+        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(adapterViewPager);
+        tabLayout.setupWithViewPager(mViewPager);
+    }
+
+    private void setupAdds() {
+        mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
+    }
+
+    private void setupConnectivity() {
         ConnectivityManager cm =
                 (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-
-
-
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
@@ -89,45 +133,6 @@ public class MainActivity extends AppCompatActivity {
         if (isConnected) {
             mNoNetwork.setVisibility(View.INVISIBLE);
         }
-        setup();
-    }
-
-    private void postTracking(Intent data) {
-        String tracking = data.getStringExtra(Popup.TRACKING);
-        String title = data.getStringExtra(Popup.TITLE);
-        if (tracking.isEmpty()) {
-            return;
-        }
-
-        if (TextUtils.isEmpty(title)) {
-            Intent intent = new Intent(this, ShipmentsUtils.class);
-            intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
-            Tracking tracking1 = new Tracking(new ShipmentInfo(tracking, id));
-            intent.putExtra(ShipmentsUtils.TRACKING_OBJECT, Parcels.wrap(tracking1));
-
-            startService(intent);
-        } else {
-            Intent intent = new Intent(this, ShipmentsUtils.class);
-            intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
-            Tracking tracking1 = new Tracking(new ShipmentInfo(tracking, title, id));
-            intent.putExtra(ShipmentsUtils.TRACKING_OBJECT, Parcels.wrap(tracking1));
-
-            startService(intent);
-        }
-    }
-
-    @SuppressLint("HardwareIds")
-    private void setup() {
-        id = Settings.Secure.getString(getContentResolver(),
-                Settings.Secure.ANDROID_ID);
-        Timber.e(id);
-        mAddShipmentFab.setOnClickListener(view ->
-                startActivityForResult(new Intent(view.getContext(), Popup.class), 100));
-
-        adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
-        mViewPager.setAdapter(adapterViewPager);
-        tabLayout.setupWithViewPager(mViewPager);
-
     }
 
     @Override
