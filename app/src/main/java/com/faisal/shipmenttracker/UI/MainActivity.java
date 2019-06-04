@@ -3,6 +3,7 @@ package com.faisal.shipmenttracker.UI;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import androidx.viewpager.widget.ViewPager;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     private FirebaseAnalytics mFirebaseAnalytics;
 
+
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
     @BindView(R.id.viewPager)
@@ -51,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     @BindView(R.id.no_network)
     TextView mNoNetwork;
+    @BindView(R.id.toolbar)
+    Toolbar mTopToolbar;
 
     static boolean isConnected;
 
@@ -62,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        setSupportActionBar(mTopToolbar);
         setTitle(getString(R.string.Shipments));
 
         MobileAds.initialize(this, getString(R.string.app_id));
