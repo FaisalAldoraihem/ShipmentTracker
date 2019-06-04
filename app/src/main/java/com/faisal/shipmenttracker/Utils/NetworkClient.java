@@ -11,7 +11,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NetworkClient {
-    public static String BASE_URL = "https://api.aftership.com/v4/";
+    public static final String BASE_URL = "https://api.aftership.com/v4/";
 
     private static Retrofit retrofit;
 

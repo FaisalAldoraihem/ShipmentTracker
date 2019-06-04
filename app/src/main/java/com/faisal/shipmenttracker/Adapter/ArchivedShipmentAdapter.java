@@ -1,6 +1,5 @@
 package com.faisal.shipmenttracker.Adapter;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -24,13 +23,12 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import retrofit2.http.POST;
 
 public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipmentAdapter.ArchivedShipmentAdapterViewHolder> {
 
     private List<ShipmentEntry> mShipments;
     private final ShipmentsOnClickHandler onClick;
-    private Context context;
+    private final Context context;
 
     public interface ShipmentsOnClickHandler {
         void onClick(View view);

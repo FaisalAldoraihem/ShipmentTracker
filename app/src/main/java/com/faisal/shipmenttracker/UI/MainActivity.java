@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setTitle("Shipments");
+        setTitle(getString(R.string.Shipments));
 
         MobileAds.initialize(this, getString(R.string.app_id));
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
 
         if (tracking.isEmpty()) {
-            Toast.makeText(this,"the tracking number is required",
+            Toast.makeText(this, getString(R.string.addtracking_fail),
                     Toast.LENGTH_LONG).show();
             return;
         }
@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        Toast.makeText(this,"Please give the app  a minute too track the shipment",
+        Toast.makeText(this, getString(R.string.giveMeaMin),
                 Toast.LENGTH_LONG).show();
     }
 

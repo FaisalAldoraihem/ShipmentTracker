@@ -28,7 +28,7 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
 
     private List<Tracking> mShipments;
     private final ShipmentsOnClickHandler onClick;
-    private Context context;
+    private final Context context;
 
     public interface ShipmentsOnClickHandler {
         void onClick(View view);

@@ -23,9 +23,11 @@ import com.faisal.shipmenttracker.R;
 
 import com.faisal.shipmenttracker.ViewModels.ShipmentsViewModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,7 +37,7 @@ public class ShipmentsFragment extends Fragment
 
     public static final String BUNDLE_RECYCLER_LAYOUT = "ShipmentsFragment.recycler.layout";
 
-    static String SHIPPING = "shipping";
+    static final String SHIPPING = "shipping";
     private List<Tracking> mShipmentsData;
     private View mRootView;
     private ShipmentsAdapter adapter;
@@ -130,13 +132,13 @@ public class ShipmentsFragment extends Fragment
 
         if (savedInstanceState != null) {
             Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            mShipments.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+            Objects.requireNonNull(mShipments.getLayoutManager()).onRestoreInstanceState(savedRecyclerLayoutState);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, mShipments.getLayoutManager().onSaveInstanceState());
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, Objects.requireNonNull(mShipments.getLayoutManager()).onSaveInstanceState());
     }
 }

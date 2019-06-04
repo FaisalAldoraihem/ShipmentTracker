@@ -1,7 +1,6 @@
 package com.faisal.shipmenttracker.Utils;
 
 import com.faisal.shipmenttracker.POJO.Shipment;
-import com.faisal.shipmenttracker.POJO.Tracking;
 
 
 import org.json.JSONObject;

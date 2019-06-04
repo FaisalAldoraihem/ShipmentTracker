@@ -114,7 +114,7 @@ public class ShipmentDetail extends AppCompatActivity {
         mDestination.setText(destination);
 
         if (date == null) {
-            date = "Delivered";
+            date = getString(R.string.delivered);
         }
 
         mDate.setText(date);

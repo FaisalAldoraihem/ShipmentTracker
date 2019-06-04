@@ -21,9 +21,11 @@ import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.ViewModels.DBViewModel;
 
+import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -101,13 +103,13 @@ public class ArchiveFragment extends Fragment
 
         if (savedInstanceState != null) {
             Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            mArchivedShipments.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+            Objects.requireNonNull(mArchivedShipments.getLayoutManager()).onRestoreInstanceState(savedRecyclerLayoutState);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, mArchivedShipments.getLayoutManager().onSaveInstanceState());
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, Objects.requireNonNull(mArchivedShipments.getLayoutManager()).onSaveInstanceState());
     }
 }

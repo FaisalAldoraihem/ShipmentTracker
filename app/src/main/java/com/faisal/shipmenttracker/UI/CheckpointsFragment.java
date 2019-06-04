@@ -16,9 +16,11 @@ import com.faisal.shipmenttracker.Adapter.CheckpointsAdapter;
 import com.faisal.shipmenttracker.POJO.Checkpoint;
 import com.faisal.shipmenttracker.R;
 
+import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -63,13 +65,13 @@ public class CheckpointsFragment extends Fragment {
 
         if (savedInstanceState != null) {
             Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            mCheckPointsList.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+            Objects.requireNonNull(mCheckPointsList.getLayoutManager()).onRestoreInstanceState(savedRecyclerLayoutState);
         }
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NotNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, mCheckPointsList.getLayoutManager().onSaveInstanceState());
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, Objects.requireNonNull(mCheckPointsList.getLayoutManager()).onSaveInstanceState());
     }
 }

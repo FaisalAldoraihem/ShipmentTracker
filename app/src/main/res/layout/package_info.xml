@@ -107,10 +107,10 @@
             android:layout_alignParentEnd="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            app:srcCompat="@drawable/ic_arrow_drop_down"
-            android:contentDescription="@string/arrow_desc"/>
+            android:contentDescription="@string/arrow_desc"
+            app:srcCompat="@drawable/ic_arrow_drop_down" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info"
