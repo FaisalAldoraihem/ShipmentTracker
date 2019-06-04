@@ -17,6 +17,8 @@ import com.faisal.shipmenttracker.R;
 
 import org.parceler.Parcels;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -61,7 +63,7 @@ public class ShipmentDetail extends AppCompatActivity {
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
         setSupportActionBar(mTopToolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         if (getIntent() != null) {

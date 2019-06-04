@@ -21,7 +21,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.faisal.shipmenttracker.Adapter.MyPagerAdapter;
-import com.faisal.shipmenttracker.BuildConfig;
 import com.faisal.shipmenttracker.R;
 
 import com.faisal.shipmenttracker.Shipment.ShipmentInfo;
