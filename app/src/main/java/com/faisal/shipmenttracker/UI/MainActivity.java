@@ -30,6 +30,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.parceler.Parcels;
 
@@ -39,6 +40,7 @@ import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity {
         mAdView = findViewById(R.id.adView);
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        Bundle bundle = new Bundle();
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
+        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
