@@ -5,7 +5,7 @@
     <string name="title_hint">Title(optional)</string>
     <string name="carrier">Carrier</string>
     <string name="done">DONE</string>
-    <string name="cancel">CANCEL</string>
+    <string name="cancel">Cancel</string>
     <string name="dots">&#8942;</string>
     <string name="Archive">Archive</string>
     <string name="Delete">Delete</string>
@@ -30,4 +30,6 @@
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
     <string name="app_id">ca-app-pub-8577762809608928~8578625843</string>
+    <string name="arrow_desc">menu arrow</string>
+    <string name="add_desc">add Shipment</string>
 </resources>

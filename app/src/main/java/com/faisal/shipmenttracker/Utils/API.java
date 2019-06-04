@@ -19,19 +19,19 @@ import retrofit2.http.Query;
 public interface API {
 
     //add you api here
-    //String api = ;
+    String api = "393affd4-063f-4f8c-af22-12decd7b93b7";
 
 
     @Headers({
             "Content-Type:application/json",
-            "aftership-api-key:" + ""//api
+            "aftership-api-key:" + api
     })
     @POST("trackings")
     Call<JSONObject> postTracking(@Body com.faisal.shipmenttracker.Shipment.Tracking info);
 
     @Headers({
             "Content-Type:application/json",
-            "aftership-api-key:" + ""//api
+            "aftership-api-key:" + api
     })
     @GET("trackings/{slug}/{tracking_number}")
     Call<Shipment> getShipment(@Path("slug") String carrier,
@@ -39,14 +39,14 @@ public interface API {
 
     @Headers({
             "Content-Type:application/json",
-            "aftership-api-key:" + ""//api
+            "aftership-api-key:" + api
     })
     @GET("trackings")
     Call<Shipment> getShipments(@Query("keyword") String id);
 
     @Headers({
             "Content-Type:application/json",
-            "aftership-api-key:" + ""//api
+            "aftership-api-key:" + api
     })
     @DELETE("trackings/{slug}/{tracking_number}")
     Call<JSONObject> deleteTracking(@Path("slug") String carrier,

@@ -66,7 +66,7 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="24dp"
         android:clickable="true"
-        android:contentDescription="add Shipment"
+        android:contentDescription="@string/add_desc"
         android:focusable="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

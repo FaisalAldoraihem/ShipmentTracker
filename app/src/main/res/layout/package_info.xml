@@ -81,10 +81,10 @@
             android:id="@+id/DeliveryBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/route"
+            android:layout_alignParentEnd="false"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="64dp"
             android:layout_marginBottom="8dp"
             android:contentDescription="@string/deliveryDate"
             android:text="@string/deliveryDate"
@@ -96,8 +96,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/DeliveryBy"
-            android:layout_alignParentEnd="true"
-            android:layout_marginEnd="64dp"
+            android:layout_alignParentEnd="false"
+            android:layout_marginStart="8dp"
             tools:text="27 May" />
 
         <ImageView
@@ -109,7 +109,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
-            app:srcCompat="@drawable/ic_arrow_drop_down" />
+            app:srcCompat="@drawable/ic_arrow_drop_down"
+            android:contentDescription="@string/arrow_desc"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/info"
@@ -117,7 +118,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/delivery_date"
             android:visibility="gone"
-            tools:visibility="visible">
+            tools:visibility="gone">
 
             <TextView
                 android:id="@+id/weight"

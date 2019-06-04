@@ -1,6 +1,7 @@
 package com.faisal.shipmenttracker.UI;
 
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +23,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class CheckpointsFragment extends Fragment{
+import static com.faisal.shipmenttracker.UI.ShipmentsFragment.BUNDLE_RECYCLER_LAYOUT;
+
+public class CheckpointsFragment extends Fragment {
 
     private View mRootView;
     private List<Checkpoint> mCheckpoints;
@@ -30,7 +33,7 @@ public class CheckpointsFragment extends Fragment{
 
     @BindView(R.id.checkpoints)
     RecyclerView mCheckPointsList;
- 
+
     public CheckpointsFragment() {
     }
 
@@ -43,7 +46,7 @@ public class CheckpointsFragment extends Fragment{
         }
         ButterKnife.bind(this, mRootView);
 
-        if(getArguments() !=null){
+        if (getArguments() != null) {
             mCheckpoints = Parcels.unwrap(getArguments().getParcelable(ShipmentDetail.CHECKPOINTS));
             adapter = new CheckpointsAdapter(mCheckpoints);
             mCheckPointsList.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -52,5 +55,21 @@ public class CheckpointsFragment extends Fragment{
 
 
         return mRootView;
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+
+        if (savedInstanceState != null) {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
+            mCheckPointsList.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, mCheckPointsList.getLayoutManager().onSaveInstanceState());
     }
 }

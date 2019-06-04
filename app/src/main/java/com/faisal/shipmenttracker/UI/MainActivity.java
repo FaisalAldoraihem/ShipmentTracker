@@ -87,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
 
         if (tracking.isEmpty()) {
+            Toast.makeText(this,"the tracking number is required",
+                    Toast.LENGTH_LONG).show();
             return;
         }
 
