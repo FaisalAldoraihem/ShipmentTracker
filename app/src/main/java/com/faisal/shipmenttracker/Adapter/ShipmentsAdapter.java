@@ -13,10 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.faisal.shipmenttracker.Database.ShipmentEntry;
-import com.faisal.shipmenttracker.POJO.Shipment;
 import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
-import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
 
 import org.parceler.Parcels;
