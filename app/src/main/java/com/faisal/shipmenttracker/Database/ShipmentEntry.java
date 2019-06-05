@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey;
 
 import com.faisal.shipmenttracker.POJO.Tracking;
 
+import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcel;
 
 
@@ -22,11 +23,12 @@ public class ShipmentEntry {
     public ShipmentEntry() {
     }
 
-    public ShipmentEntry(String id, Tracking tracking) {
+    public ShipmentEntry(@NotNull String id, Tracking tracking) {
         this.id = id;
         this.tracking = tracking;
     }
 
+    @NotNull
     public String getId() {
         return id;
     }
@@ -35,7 +37,7 @@ public class ShipmentEntry {
         return tracking;
     }
 
-    public void setId(String id) {
+    public void setId(@NotNull String id) {
         this.id = id;
     }
 }

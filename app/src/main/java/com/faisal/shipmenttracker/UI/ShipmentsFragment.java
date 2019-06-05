@@ -32,7 +32,7 @@ import butterknife.ButterKnife;
 public class ShipmentsFragment extends Fragment
         implements ShipmentsAdapter.ShipmentsOnClickHandler {
 
-    static String SHIPPING = "shipping";
+    static final String SHIPPING = "shipping";
     private List<Tracking> mShipmentsData;
     private View mRootView;
     private ShipmentsAdapter adapter;

@@ -1,9 +1,6 @@
 package com.faisal.shipmenttracker.Utils;
 
 import android.app.IntentService;
-import android.appwidget.AppWidgetManager;
-import android.content.ComponentName;
-import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
@@ -11,9 +8,7 @@ import androidx.annotation.Nullable;
 
 import com.faisal.shipmenttracker.Database.ArchiveDatabase;
 import com.faisal.shipmenttracker.Database.ShipmentEntry;
-import com.faisal.shipmenttracker.POJO.Shipment;
 import com.faisal.shipmenttracker.Shipment.Tracking;
-import com.faisal.shipmenttracker.UI.MainActivity;
 import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 
 import org.jetbrains.annotations.NotNull;
@@ -36,8 +31,8 @@ public class ShipmentsUtils extends IntentService {
     public static final String SLUG = "slug";
     public static final String SHIPMENT_OBJECT = "shipmentObj";
 
-    private Retrofit retrofit = NetworkClient.getRetrofitClient();
-    private API api = retrofit.create(API.class);
+    private final Retrofit retrofit = NetworkClient.getRetrofitClient();
+    private final API api = retrofit.create(API.class);
     private ArchiveDatabase dbM;
 
     public ShipmentsUtils() {
@@ -48,6 +43,7 @@ public class ShipmentsUtils extends IntentService {
     protected void onHandleIntent(@Nullable Intent intent) {
         if (intent != null) {
             final String action = intent.getAction();
+            assert action != null;
             switch (action) {
                 case ACTION_ADD_TOO_DATABASE:
                     addToDatabase(Parcels.unwrap(intent.getParcelableExtra(SHIPMENT_OBJECT)));
@@ -99,7 +95,7 @@ public class ShipmentsUtils extends IntentService {
             }
 
             @Override
-            public void onFailure(@NotNull Call<JSONObject> call, Throwable t) {
+            public void onFailure(@NotNull Call<JSONObject> call, @NotNull Throwable t) {
 
             }
         });
@@ -109,17 +105,13 @@ public class ShipmentsUtils extends IntentService {
 
     public void addToDatabase(ShipmentEntry entry) {
         dbM = ArchiveDatabase.getInstance(this);
-        AppExecutors.getInstance().diskIO().execute(() -> {
-            dbM.shipmentDao().insertShipment(entry);
-        });
+        AppExecutors.getInstance().diskIO().execute(() -> dbM.shipmentDao().insertShipment(entry));
     }
 
     public void deleteFromDatabase(ShipmentEntry entry) {
         dbM = ArchiveDatabase.getInstance(this);
         Timber.e("Yes");
-        AppExecutors.getInstance().diskIO().execute(() -> {
-            dbM.shipmentDao().deleteShipment(entry);
-        });
+        AppExecutors.getInstance().diskIO().execute(() -> dbM.shipmentDao().deleteShipment(entry));
     }
 
 }

@@ -8,7 +8,7 @@ import com.faisal.shipmenttracker.UI.ArchiveFragment;
 import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
-    private Fragment[] childFragments;
+    private final Fragment[] childFragments;
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
