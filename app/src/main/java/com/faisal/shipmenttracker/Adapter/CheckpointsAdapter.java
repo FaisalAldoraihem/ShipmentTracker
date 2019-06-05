@@ -29,7 +29,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
     }
 
 
-    public class CheckpointsAdapterViewHolder extends RecyclerView.ViewHolder {
+    class CheckpointsAdapterViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.expected_delivery)
         TextView lastUpdate;
         @BindView(R.id.last_location)
@@ -37,7 +37,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
         @BindView(R.id.delivery_date)
         TextView checkpointDate;
 
-        public CheckpointsAdapterViewHolder(@NonNull View itemView) {
+        CheckpointsAdapterViewHolder(@NonNull View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
@@ -47,7 +47,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
             String update = mCheckpoints.get(position).getMessage();
             String date = getTime(mCheckpoints.get(position).getCheckpointTime());
 
-            if(location != null || !TextUtils.isEmpty(location)){
+            if (location != null || !TextUtils.isEmpty(location)) {
                 lastLocation.setText(location);
             }
             lastUpdate.setText(update);
@@ -87,8 +87,8 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
         }
     }
 
-    private String getTime(String time){
-       return time.substring(0,10);
+    private String getTime(String time) {
+        return time.substring(0, 10);
 
     }
 }

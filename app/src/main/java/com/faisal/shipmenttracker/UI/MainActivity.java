@@ -26,12 +26,9 @@ import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.Shipment.ShipmentInfo;
 import com.faisal.shipmenttracker.Shipment.Tracking;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.MobileAds;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.parceler.Parcels;
 
@@ -40,8 +37,6 @@ import butterknife.ButterKnife;
 import timber.log.Timber;
 
 public class MainActivity extends AppCompatActivity {
-    private AdView mAdView;
-    private FirebaseAnalytics mFirebaseAnalytics;
 
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
@@ -64,20 +59,12 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setTitle("Shipments");
 
-        MobileAds.initialize(this, getString(R.string.app_id));
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        Bundle bundle = new Bundle();
-        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
-        mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
-
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
         }
 
         setupView();
         setupConnectivity();
-        setupAdds();
     }
 
     private void postTracking(Intent data) {
@@ -100,8 +87,7 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        Toast.makeText(this,"Please give the app  a minute too track the shipment",
-                Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.waitForaRes), Toast.LENGTH_LONG).show();
     }
 
     @SuppressLint("HardwareIds")
@@ -115,12 +101,6 @@ public class MainActivity extends AppCompatActivity {
         adapterViewPager = new MyPagerAdapter(getSupportFragmentManager());
         mViewPager.setAdapter(adapterViewPager);
         tabLayout.setupWithViewPager(mViewPager);
-    }
-
-    private void setupAdds() {
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
     }
 
     private void setupConnectivity() {

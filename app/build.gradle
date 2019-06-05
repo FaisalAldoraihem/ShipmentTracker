@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -48,7 +47,6 @@ dependencies {
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.Okhttp"
     implementation "org.parceler:parceler-api:$rootProject.parcler"
     annotationProcessor "org.parceler:parceler:$rootProject.parcler"
-    implementation "com.google.firebase:firebase-core:$rootProject.firebase"
-    implementation "com.google.firebase:firebase-ads:$rootProject.firebaseAdds"
+
 
 }

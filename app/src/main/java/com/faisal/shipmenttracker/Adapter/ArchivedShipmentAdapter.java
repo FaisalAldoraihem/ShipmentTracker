@@ -65,9 +65,14 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
         void bind(int position) {
             int shipmentsSize = mShipments.get(position).getTracking().getCheckpoints().size();
             String title = mShipments.get(position).getTracking().getTitle();
-            String lastDes = mShipments.get(position).getTracking().getCheckpoints().get(shipmentsSize - 1).getMessage();
+            String lastDes;
             String expectedDelivery = mShipments.get(position).getTracking().getExpectedDelivery();
 
+            if(shipmentsSize > 0){
+                lastDes = mShipments.get(position).getTracking().getCheckpoints().get(shipmentsSize - 1).getMessage();
+            }else {
+                lastDes = mShipments.get(position).getTracking().getCheckpoints().get(0).getMessage();
+            }
 
             mTitle.setText(title);
             mLastDestination.setText(lastDes);
