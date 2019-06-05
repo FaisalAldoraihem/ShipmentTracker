@@ -2,7 +2,6 @@ package com.faisal.shipmenttracker.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,16 +20,13 @@ import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
 import com.faisal.shipmenttracker.ViewModels.DBViewModel;
 
-import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.faisal.shipmenttracker.UI.ShipmentsFragment.BUNDLE_RECYCLER_LAYOUT;
 import static com.faisal.shipmenttracker.UI.ShipmentsFragment.SHIPPING;
 
 public class ArchiveFragment extends Fragment
@@ -62,7 +58,7 @@ public class ArchiveFragment extends Fragment
         return mRootView;
     }
 
-    private void setupView() {
+    private void setupView(){
         adapter = new ArchivedShipmentAdapter(null, this, getContext());
         mArchivedShipments.setAdapter(adapter);
         mArchivedShipments.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -95,21 +91,5 @@ public class ArchiveFragment extends Fragment
         Intent intent = new Intent(getContext(), ShipmentDetail.class);
         intent.putExtra(SHIPPING, Parcels.wrap(tracking));
         startActivity(intent);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            Objects.requireNonNull(mArchivedShipments.getLayoutManager()).onRestoreInstanceState(savedRecyclerLayoutState);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(@NotNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, Objects.requireNonNull(mArchivedShipments.getLayoutManager()).onSaveInstanceState());
     }
 }

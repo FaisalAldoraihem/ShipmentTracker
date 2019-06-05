@@ -2,7 +2,6 @@ package com.faisal.shipmenttracker.UI;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +22,9 @@ import com.faisal.shipmenttracker.R;
 
 import com.faisal.shipmenttracker.ViewModels.ShipmentsViewModel;
 
-import org.jetbrains.annotations.NotNull;
 import org.parceler.Parcels;
 
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,9 +32,7 @@ import butterknife.ButterKnife;
 public class ShipmentsFragment extends Fragment
         implements ShipmentsAdapter.ShipmentsOnClickHandler {
 
-    public static final String BUNDLE_RECYCLER_LAYOUT = "ShipmentsFragment.recycler.layout";
-
-    static final String SHIPPING = "shipping";
+    static String SHIPPING = "shipping";
     private List<Tracking> mShipmentsData;
     private View mRootView;
     private ShipmentsAdapter adapter;
@@ -124,21 +119,5 @@ public class ShipmentsFragment extends Fragment
         Intent intent = new Intent(getContext(), ShipmentDetail.class);
         intent.putExtra(SHIPPING, Parcels.wrap(tracking));
         startActivity(intent);
-    }
-
-    @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-
-        if (savedInstanceState != null) {
-            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(BUNDLE_RECYCLER_LAYOUT);
-            Objects.requireNonNull(mShipments.getLayoutManager()).onRestoreInstanceState(savedRecyclerLayoutState);
-        }
-    }
-
-    @Override
-    public void onSaveInstanceState(@NotNull Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putParcelable(BUNDLE_RECYCLER_LAYOUT, Objects.requireNonNull(mShipments.getLayoutManager()).onSaveInstanceState());
     }
 }

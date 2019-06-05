@@ -1,5 +1,6 @@
 package com.faisal.shipmenttracker.Adapter;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -23,12 +24,13 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import retrofit2.http.POST;
 
 public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipmentAdapter.ArchivedShipmentAdapterViewHolder> {
 
     private List<ShipmentEntry> mShipments;
     private final ShipmentsOnClickHandler onClick;
-    private final Context context;
+    private Context context;
 
     public interface ShipmentsOnClickHandler {
         void onClick(View view);
@@ -63,14 +65,9 @@ public class ArchivedShipmentAdapter extends RecyclerView.Adapter<ArchivedShipme
         void bind(int position) {
             int shipmentsSize = mShipments.get(position).getTracking().getCheckpoints().size();
             String title = mShipments.get(position).getTracking().getTitle();
-            String lastDes;
+            String lastDes = mShipments.get(position).getTracking().getCheckpoints().get(shipmentsSize - 1).getMessage();
             String expectedDelivery = mShipments.get(position).getTracking().getExpectedDelivery();
 
-            if (shipmentsSize > 0) {
-                lastDes = mShipments.get(position).getTracking().getCheckpoints().get(shipmentsSize - 1).getMessage();
-            } else {
-                lastDes = mShipments.get(position).getTracking().getCheckpoints().get(0).getMessage();
-            }
 
             mTitle.setText(title);
             mLastDestination.setText(lastDes);

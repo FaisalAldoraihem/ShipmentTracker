@@ -22,7 +22,9 @@ public class ShipmentConverters {
     public static String fromTracking(Tracking tracking){
         Gson gson = new Gson();
 
-        return gson.toJson(tracking);
+        String json = gson.toJson(tracking);
+
+        return json;
     }
 
     @TypeConverter
@@ -36,6 +38,8 @@ public class ShipmentConverters {
     public static String checkpointFromCheckpoint(List<Checkpoint> tracking){
         Gson gson = new Gson();
 
-        return gson.toJson(tracking);
+        String json = gson.toJson(tracking);
+
+        return json;
     }
 }

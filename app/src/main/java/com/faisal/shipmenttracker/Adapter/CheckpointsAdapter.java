@@ -1,6 +1,7 @@
 package com.faisal.shipmenttracker.Adapter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ import butterknife.ButterKnife;
 
 public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.CheckpointsAdapterViewHolder> {
 
-    private final List<Checkpoint> mCheckpoints;
+    private List<Checkpoint> mCheckpoints;
 
     public CheckpointsAdapter(List<Checkpoint> mCheckpoints) {
         this.mCheckpoints = mCheckpoints;
@@ -46,7 +47,7 @@ public class CheckpointsAdapter extends RecyclerView.Adapter<CheckpointsAdapter.
             String update = mCheckpoints.get(position).getMessage();
             String date = getTime(mCheckpoints.get(position).getCheckpointTime());
 
-            if(location != null ){
+            if(location != null || !TextUtils.isEmpty(location)){
                 lastLocation.setText(location);
             }
             lastUpdate.setText(update);

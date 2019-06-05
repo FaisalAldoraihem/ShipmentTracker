@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
 
+import com.faisal.shipmenttracker.Database.ShipmentEntry;
+import com.faisal.shipmenttracker.POJO.Shipment;
 import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.UI.MainActivity;
 import com.faisal.shipmenttracker.Utils.ShipmentsUtils;

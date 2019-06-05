@@ -28,7 +28,7 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
 
     private List<Tracking> mShipments;
     private final ShipmentsOnClickHandler onClick;
-    private final Context context;
+    private Context context;
 
     public interface ShipmentsOnClickHandler {
         void onClick(View view);
@@ -63,14 +63,9 @@ public class ShipmentsAdapter extends RecyclerView.Adapter<ShipmentsAdapter.Ship
         void bind(int position) {
             int shipmentsSize = mShipments.get(position).getCheckpoints().size();
             String title = mShipments.get(position).getTitle();
-            String lastDes;
+            String lastDes = mShipments.get(position).getCheckpoints().get(shipmentsSize - 1).getMessage();
             String expectedDelivery = mShipments.get(position).getExpectedDelivery();
 
-            if (shipmentsSize > 0) {
-                lastDes = mShipments.get(position).getCheckpoints().get(shipmentsSize - 1).getMessage();
-            } else {
-                lastDes = mShipments.get(position).getCheckpoints().get(0).getMessage();
-            }
 
             mTitle.setText(title);
             mLastDestination.setText(lastDes);

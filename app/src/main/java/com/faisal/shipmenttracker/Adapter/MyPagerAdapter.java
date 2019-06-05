@@ -8,10 +8,7 @@ import com.faisal.shipmenttracker.UI.ArchiveFragment;
 import com.faisal.shipmenttracker.UI.ShipmentsFragment;
 
 public class MyPagerAdapter extends FragmentPagerAdapter {
-    public static final String ARCHIVE = "Archive";
-    public static final String INTRANSIT = "In Transit";
-
-    private final Fragment[] childFragments;
+    private Fragment[] childFragments;
 
     public MyPagerAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -38,9 +35,9 @@ public class MyPagerAdapter extends FragmentPagerAdapter {
     @Override
     public CharSequence getPageTitle(int position) {
         if (position == 0) {
-            return INTRANSIT;
+            return "In Transit";
         } else {
-            return ARCHIVE;
+            return "Archive";
         }
     }
 }

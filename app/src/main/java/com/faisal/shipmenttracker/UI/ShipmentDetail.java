@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.FragmentManager;
 
@@ -16,8 +15,6 @@ import com.faisal.shipmenttracker.POJO.Tracking;
 import com.faisal.shipmenttracker.R;
 
 import org.parceler.Parcels;
-
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,8 +32,6 @@ public class ShipmentDetail extends AppCompatActivity {
     RelativeLayout base;
     @BindView(R.id.Drop)
     ImageView arrow;
-    @BindView(R.id.toolbarDetail)
-    Toolbar mTopToolbar;
 
     @BindView(R.id.expected_delivery)
     TextView mSlug;
@@ -60,16 +55,8 @@ public class ShipmentDetail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.package_info);
         ButterKnife.bind(this);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
 
-        setSupportActionBar(mTopToolbar);
-        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-        if (getIntent() != null) {
-            mTracking = Parcels.unwrap(getIntent().getParcelableExtra(ShipmentsFragment.SHIPPING));
-        }
-
+        mTracking = Parcels.unwrap(getIntent().getParcelableExtra(ShipmentsFragment.SHIPPING));
         if (mTracking != null) {
             setupView();
         }
@@ -127,7 +114,7 @@ public class ShipmentDetail extends AppCompatActivity {
         mDestination.setText(destination);
 
         if (date == null) {
-            date = getString(R.string.delivered);
+            date = "Delivered";
         }
 
         mDate.setText(date);

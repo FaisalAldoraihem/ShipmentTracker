@@ -3,7 +3,6 @@ package com.faisal.shipmenttracker.UI;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import androidx.viewpager.widget.ViewPager;
@@ -21,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.faisal.shipmenttracker.Adapter.MyPagerAdapter;
+import com.faisal.shipmenttracker.BuildConfig;
 import com.faisal.shipmenttracker.R;
 
 import com.faisal.shipmenttracker.Shipment.ShipmentInfo;
@@ -43,7 +43,6 @@ public class MainActivity extends AppCompatActivity {
     private AdView mAdView;
     private FirebaseAnalytics mFirebaseAnalytics;
 
-
     @BindView(R.id.add_shipment)
     FloatingActionButton mAddShipmentFab;
     @BindView(R.id.viewPager)
@@ -52,8 +51,6 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout;
     @BindView(R.id.no_network)
     TextView mNoNetwork;
-    @BindView(R.id.toolbar)
-    Toolbar mTopToolbar;
 
     static boolean isConnected;
 
@@ -65,8 +62,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-        setSupportActionBar(mTopToolbar);
-        setTitle(getString(R.string.Shipments));
+        setTitle("Shipments");
 
         MobileAds.initialize(this, getString(R.string.app_id));
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -74,6 +70,10 @@ public class MainActivity extends AppCompatActivity {
         Bundle bundle = new Bundle();
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, id);
         mFirebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle);
+
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        }
 
         setupView();
         setupConnectivity();
@@ -87,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
         intent.setAction(ShipmentsUtils.ACTION_ADD_TOO_TRACKING);
 
         if (tracking.isEmpty()) {
-            Toast.makeText(this, getString(R.string.addtracking_fail),
-                    Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -102,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
             startService(intent);
         }
 
-        Toast.makeText(this, getString(R.string.giveMeaMin),
+        Toast.makeText(this,"Please give the app  a minute too track the shipment",
                 Toast.LENGTH_LONG).show();
     }
 
